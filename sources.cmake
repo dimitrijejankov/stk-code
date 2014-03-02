@@ -156,6 +156,7 @@ src/modes/standard_race.cpp
 src/modes/three_strikes_battle.cpp
 src/modes/tutorial_world.cpp
 src/modes/world.cpp
+src/modes/editor_world.cpp
 src/modes/world_status.cpp
 src/modes/world_with_rank.cpp
 src/network/client_network_manager.cpp
@@ -487,6 +488,7 @@ src/modes/standard_race.hpp
 src/modes/three_strikes_battle.hpp
 src/modes/tutorial_world.hpp
 src/modes/world.hpp
+src/modes/editor_world.hpp
 src/modes/world_status.hpp
 src/modes/world_with_rank.hpp
 src/network/client_network_manager.hpp

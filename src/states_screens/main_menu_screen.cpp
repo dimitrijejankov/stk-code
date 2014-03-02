@@ -36,6 +36,7 @@
 #include "modes/cutscene_world.hpp"
 #include "modes/overworld.hpp"
 #include "modes/demo_world.hpp"
+#include "modes/editor_world.hpp"
 #include "online/request_manager.hpp"
 #include "states_screens/addons_screen.hpp"
 #include "states_screens/credits.hpp"
@@ -392,6 +393,39 @@ void MainMenuScreen::eventCallback(Widget* widget, const std::string& name,
                 return;
             }
             OverWorld::enterOverWorld();
+        }
+    }
+    else if (selection == "editor")
+    {
+        PlayerProfile *player = PlayerManager::get()->getCurrentPlayer();
+        if (player->isFirstTime())
+        {
+            StateManager::get()->enterGameState();
+            race_manager->setMinorMode(RaceManager::MINOR_MODE_CUTSCENE);
+            race_manager->setNumKarts( 0 );
+            race_manager->setNumPlayers(0);
+            race_manager->setNumLocalPlayers(0);
+            race_manager->startSingleRace("introcutscene", 999, false);
+
+            std::vector<std::string> parts;
+            parts.push_back("introcutscene");
+            parts.push_back("introcutscene2");
+            ((CutsceneWorld*)World::getWorld())->setParts(parts);
+            //race_manager->startSingleRace("introcutscene2", 999, false);
+            return;
+        }
+        else
+        {
+            const std::string default_kart = UserConfigParams::m_default_kart;
+            if (player->isLocked(default_kart))
+            {
+                KartSelectionScreen *next = OfflineKartSelectionScreen::getInstance();
+                next->setGoToOverworldNext();
+                next->setMultiplayer(false);
+                StateManager::get()->resetAndGoToScreen(next);
+                return;
+            }
+            EditorWorld::enterEditorWorld();
         }
     }
     else if (selection == "online")

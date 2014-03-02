@@ -60,8 +60,8 @@ PlayerInfoDialog::~PlayerInfoDialog()
 // -----------------------------------------------------------------------------
 void PlayerInfoDialog::showRegularDialog()
 {
-    //clearWindow();
-    doInit();
+    clearWindow();
+    //doInit();
 
     const int y1 = m_area.getHeight()/6;
     const int y2 = m_area.getHeight()*2/6;
