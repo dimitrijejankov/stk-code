@@ -1030,6 +1030,8 @@ void initRest()
                  file_manager->getAddonsFile("karts/"));
     track_manager->addTrackSearchDir(
                  file_manager->getAddonsFile("tracks/"));
+    //track_manager->addTrackSearchDir(
+                 //file_manager->getAddonsFile("usertracks/"));
 
     track_manager->loadTrackList();
     music_manager->addMusicToTracks();

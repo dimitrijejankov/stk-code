@@ -35,6 +35,7 @@
 #include "states_screens/race_gui_overworld.hpp"
 #include "tracks/track.hpp"
 #include "tracks/track_object_manager.hpp"
+#include "tracks/track_manager.hpp"
 
 //-----------------------------------------------------------------------------
 EditorWorld::EditorWorld() : WorldWithRank()
@@ -57,9 +58,10 @@ void EditorWorld::enterEditorWorld()
 
     race_manager->setNumLocalPlayers(1);
     race_manager->setMajorMode (RaceManager::MAJOR_MODE_SINGLE);
-    race_manager->setMinorMode (RaceManager::MINOR_MODE_OVERWORLD);
+    race_manager->setMinorMode (RaceManager::MINOR_MODE_EDITOR);
     race_manager->setNumKarts( 1 );
-    race_manager->setTrack( "olivermath" );
+    track_manager->loadTrack("data/../../stk-assets/usertracks/example/"); // temporary only to test runtime track loading....
+    race_manager->setTrack( "example" );
     race_manager->setDifficulty(RaceManager::DIFFICULTY_HARD);
 
     // Use keyboard 0 by default (FIXME: let player choose?)
@@ -88,11 +90,11 @@ void EditorWorld::enterEditorWorld()
     StateManager::get()->enterGameState();
     race_manager->setupPlayerKartInfo();
     race_manager->startNew(false);
-    if(race_manager->haveKartLastPositionOnOverworld()){
-            EditorWorld *ow = (EditorWorld*)World::getWorld();
-            ow->getKart(0)->setXYZ(race_manager->getKartLastPositionOnOverworld());
-            ow->moveKartAfterRescue(ow->getKart(0));
-        }
+    //if(race_manager->haveKartLastPositionOnOverworld()){
+    //        EditorWorld *ow = (EditorWorld*)World::getWorld();
+    //        ow->getKart(0)->setXYZ(race_manager->getKartLastPositionOnOverworld());
+    //        ow->moveKartAfterRescue(ow->getKart(0));
+    //    }
     irr_driver->showPointer(); // User should be able to click on the minimap
 
 }   // enterOverWorld
@@ -122,7 +124,7 @@ void EditorWorld::update(float dt)
     WorldWithRank::updateTrack(dt);
     const unsigned int kart_amount  = m_karts.size();
 
-    // isn't it cool, on the overworld nitro is free!
+    // isn't it cool, on the editor nitro is free!
     for(unsigned int n=0; n<kart_amount; n++)
     {
         m_karts[n]->setEnergy(100.0f);

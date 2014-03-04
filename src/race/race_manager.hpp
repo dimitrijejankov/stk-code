@@ -110,6 +110,7 @@ public:
         MINOR_MODE_FOLLOW_LEADER = LINEAR_RACE(2, false),
         MINOR_MODE_OVERWORLD     = LINEAR_RACE(3, false),
         MINOR_MODE_TUTORIAL      = LINEAR_RACE(4, false),
+        MINOR_MODE_EDITOR        = LINEAR_RACE(5, false),
 
         MINOR_MODE_3_STRIKES     = BATTLE_ARENA(0),
         MINOR_MODE_SOCCER        = BATTLE_ARENA(1),

@@ -40,6 +40,7 @@
 #include "modes/profile_world.hpp"
 #include "modes/standard_race.hpp"
 #include "modes/tutorial_world.hpp"
+#include "modes/editor_world.hpp"
 #include "modes/world.hpp"
 #include "modes/three_strikes_battle.hpp"
 #include "modes/soccer_world.hpp"
@@ -444,6 +445,8 @@ void RaceManager::startNextRace()
         World::setWorld(new CutsceneWorld());
     else if(m_minor_mode==MINOR_MODE_EASTER_EGG)
         World::setWorld(new EasterEggHunt());
+    else if(m_minor_mode==MINOR_MODE_EDITOR)
+        World::setWorld(new EditorWorld());
     else
     {
         Log::error("RaceManager", "Could not create given race mode.");
